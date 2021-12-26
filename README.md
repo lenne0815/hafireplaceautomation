@@ -12,6 +12,7 @@ Complete solution to automate your ambient air-independent fireplace using Homea
   - Servo 9g
   - Air intake ventilator
   - High temp sensor
+  - Relais
 
 ### 100mm Inline Fan
 
