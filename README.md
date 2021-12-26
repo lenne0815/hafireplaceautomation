@@ -36,6 +36,8 @@ Complete solution to automate your ambient air-independent fireplace using Homea
 
 ### 3D Printed 100mm Air duct
 
+https://www.cgtrader.com/3d-models/electronics/other/servo-controlled-duct-100mm
+
 ![Screenshot 2021-12-26 131024](https://user-images.githubusercontent.com/33530387/147407618-9e3e52c8-ffa5-442b-85cc-571ec7240fa2.jpg)
 
 ## Sensor Readings / Servo position
