@@ -1,0 +1,124 @@
+esphome:
+  name: kamin_abluft
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: ""
+  password: ""
+  manual_ip:
+    static_ip: 192.168.178.211
+    gateway: 192.168.178.1
+    subnet: 255.255.255.0
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: ""
+    password: ""
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+fan:
+  - platform: speed
+    id: kamin_abluft_fan
+    output: my_output_1
+    name: "Kamin Abluft Fan"
+    
+output:  
+
+  - platform: template
+    id: my_output_1
+    type: float
+    write_action:
+      - if:
+          condition:
+            lambda: return ((state == 0));
+          then:
+            - switch.turn_off: fan_low
+            - switch.turn_off: fan_mid
+            - switch.turn_off: fan_fast
+      - if:
+          condition:
+            lambda: return ((state > 0) && (state < .34));
+          then:
+            - switch.turn_off: fan_mid
+            - switch.turn_off: fan_fast
+            - switch.turn_on: fan_low
+      - if:
+          condition:
+            lambda: return ((state > .34) && (state < .7));
+          then:
+            - switch.turn_off: fan_low
+            - switch.turn_off: fan_fast
+            - switch.turn_on: fan_mid
+      - if:
+          condition:
+            lambda: return ((state == 1));
+          then:
+            - switch.turn_off: fan_low
+            - switch.turn_off: fan_mid
+            - switch.turn_on: fan_fast
+
+switch:
+  - platform: gpio
+    name: "Kamin Luefter Low"
+    restore_mode: ALWAYS_OFF
+    pin: 
+      number: D1
+      inverted: yes
+    id: fan_low
+    interlock: &interlock_group [fan_low, fan_mid, fan_fast]
+    interlock_wait_time: 1s
+  - platform: gpio
+    name: "Kamin Luefter Medium"
+    restore_mode: ALWAYS_OFF
+    pin:
+      number: D2
+      inverted: yes
+    id: fan_mid
+    interlock: *interlock_group
+    interlock_wait_time: 1s
+  - platform: gpio
+    name: "Kamin Luefter Fast"
+    restore_mode: ALWAYS_OFF
+    pin:
+      number: D3
+      inverted: yes
+    id: fan_fast
+    interlock: *interlock_group
+    interlock_wait_time: 1s
+  - platform: gpio
+    name: "Kamin Luefter Hauptschalter"
+    restore_mode: ALWAYS_ON
+    pin:
+      number: D7
+      inverted: yes
+    id: fan_off
+    
+i2c:
+  sda: D6
+  scl: D5
+  scan: True
+
+sensor:
+  - platform: bme280
+    temperature:
+      name: "Kamin Abluft Temperature"
+      oversampling: 16x
+      id: temp
+      filters:
+       - offset: -4.5
+    pressure:
+      name: "Kamin Abluft Pressure"
+    humidity:
+      name: "Kamin Abluft Humidity"
+    address: 0x76
+    update_interval: 20s
