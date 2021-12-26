@@ -1,3 +1,5 @@
+# ESPHome configuration for the main controller ESP, you can get the pins for soldering here, the BME280 is optional
+
 esphome:
   name: kamin
   platform: ESP8266
