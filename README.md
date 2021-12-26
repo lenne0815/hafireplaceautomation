@@ -30,10 +30,13 @@ High Temp Sensor (MAX6675)
 
 ![Screenshot 2021-12-26 131024](https://user-images.githubusercontent.com/33530387/147407618-9e3e52c8-ffa5-442b-85cc-571ec7240fa2.jpg)
 
-## Automations
+## Sensor Readings
 
 ![Screenshot 2021-12-26 120943](https://user-images.githubusercontent.com/33530387/147407087-1c68f598-4eff-4f3b-9e56-256cef497d62.jpg)
 ![Screenshot 2021-12-26 121017](https://user-images.githubusercontent.com/33530387/147407088-31e553b7-c3ea-4024-90c2-d8060c95dbc7.jpg)
+
+##Node Red Flow
+
 ![Screenshot 2021-12-26 124933](https://user-images.githubusercontent.com/33530387/147407091-b2f64c94-3e74-446b-8afe-dd10adad381e.jpg)
 
 
