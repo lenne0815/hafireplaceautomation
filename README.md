@@ -41,10 +41,8 @@ Complete solution to automate your ambient air-independent fireplace using Homea
 
 ![Screenshot 2021-12-26 132202](https://user-images.githubusercontent.com/33530387/147407874-e9f7fc14-214f-4310-8aed-9b955f051c67.jpg)
 
+## Installed
 
-
-
-
-
-                        
-                    
+![IMG_20211226_125605](https://user-images.githubusercontent.com/33530387/147407900-c6949ad6-bd60-41fa-97c1-aa081ac01f9c.jpg)
+![IMG_20211226_125616](https://user-images.githubusercontent.com/33530387/147407902-5d43df0f-0f12-4f82-8dd9-2902b906ab9f.jpg)
+![IMG_20211226_125558](https://user-images.githubusercontent.com/33530387/147407903-d6d0a3e4-4104-4135-b31b-9439cde09d90.jpg)
