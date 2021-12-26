@@ -1,0 +1,12 @@
+alias: Write Servo Value to ESP
+description: ''
+trigger:
+  - platform: state
+    entity_id: input_number.servo_control
+condition: []
+action:
+  - service: esphome.kamin_control_servo
+    data_template:
+      level: '{{ trigger.to_state.state | int }}'
+mode: queued
+max: 100
