@@ -1,0 +1,20 @@
+- platform: trend
+  sensors:
+    temp_falling_aussentemperatur:
+            entity_id: sensor.openweathermap_temperature
+            sample_duration: 1800
+            max_samples: 120
+            min_gradient: -0.0001
+            device_class: cold
+    temp_rising_aussentemperatur:
+            entity_id: sensor.openweathermap_temperature
+            sample_duration: 1800
+            max_samples: 120
+            min_gradient: 0.0001
+            device_class: heat
+    temp_falling_kamin:
+            entity_id: sensor.kamin_core_temp
+            sample_duration: 1800
+            max_samples: 60
+            min_gradient: -0.001
+            device_class: cold
