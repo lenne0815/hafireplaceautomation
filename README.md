@@ -2,6 +2,11 @@
 
 Complete solution to automate your ambient air-independent fireplace using Homeassistant / Node Red
 
+# Prerequisits:
+  - Up and running Homeassistant Installation
+  - NodeRed (you can do all all the automations native as well, its just easier with NodeRed)
+  - ESPHome integration
+
 ## Basic Parts list:
   - ESP 8255
   - Servo 9g
