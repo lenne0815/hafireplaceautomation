@@ -1,0 +1,221 @@
+type: grid
+cards:
+  - style: |
+      ha-card {
+          box-shadow:
+            {% if is_state('sun.sun', 'above_horizon') %}
+              -5px -5px 15px #ffffff, 5px 5px 15px #ebebeb;
+            {% elif is_state('sun.sun', 'below_horizon') %}
+              -5px -5px 15px #2c2c2c, 5px 5px 15px #191919;
+            {% endif %}
+          margin: 10px;
+          border-radius: 15px;
+          background-color: var(--primary-background-color);
+       }
+    type: custom:mini-graph-card
+    show:
+      name: true
+      icon: false
+    entities:
+      - entity: input_number.servo_control
+    name: Zuluft
+    points_per_hour: 12
+    hours_to_show: 2
+  - style: |
+      ha-card {
+          box-shadow:
+            {% if is_state('sun.sun', 'above_horizon') %}
+              -5px -5px 15px #ffffff, 5px 5px 15px #ebebeb;
+            {% elif is_state('sun.sun', 'below_horizon') %}
+              -5px -5px 15px #2c2c2c, 5px 5px 15px #191919;
+            {% endif %}
+          margin: 10px;
+          border-radius: 15px;
+          background-color: var(--primary-background-color);
+       }
+    type: custom:mini-graph-card
+    show:
+      name: true
+      icon: false
+    entities:
+      - entity: sensor.kamin_abluft_temperature
+    name: Abluft C°
+    points_per_hour: 12
+    hours_to_show: 2
+  - style: |
+      ha-card {
+          box-shadow:
+            {% if is_state('sun.sun', 'above_horizon') %}
+              -5px -5px 15px #ffffff, 5px 5px 15px #ebebeb;
+            {% elif is_state('sun.sun', 'below_horizon') %}
+              -5px -5px 15px #2c2c2c, 5px 5px 15px #191919;
+            {% endif %}
+          margin: 10px;
+          border-radius: 15px;
+          background-color: var(--primary-background-color);
+       }
+    type: custom:mini-graph-card
+    show:
+      name: true
+      icon: false
+    entities:
+      - entity: sensor.kamin_core_temp
+    name: Kamin Core C°
+    points_per_hour: 12
+    hours_to_show: 2
+  - entity: switch.nodered_c69c68eb_83f078
+    icon: mdi:fire-alert
+    name: Anheizen
+    size: 30%
+    tap_action:
+      action: toggle
+      haptic: light
+    hold_action:
+      action: more-info
+      haptic: medium
+    styles:
+      img_cell:
+        - padding-left: 50%
+        - justify-content: start
+      card:
+        - width: min(25vw, 145px)
+        - height: min(25vw, 140px)
+        - margin: 5px
+        - margin-top: 0px
+        - borderadius: 15px
+        - background-color: var(--primary-background-color)
+      icon:
+        - color: var(--primary-text-color)
+      name:
+        - justify-self: start
+        - font-weight: bold
+        - font-size: 15px
+        - padding-left: 15px
+      state:
+        - justify-self: start
+        - font-weight: bold
+        - font-size: 15px
+        - opacity: 0.6
+        - padding: 0 15px 5px
+    state:
+      - value: 'on'
+        styles:
+          card:
+            - border-style: solid
+            - border-width: 2px
+            - border-color: var(--paper-item-icon-active-color)
+            - box-shadow: |
+                [[[
+                  if (states['sun.sun'].state == "below_horizon")
+                    return 'inset -4px -4px 5px #2c2c2c, inset 4px 4px 5px #191919';
+                  else if (states['sun.sun'].state == "above_horizon")
+                    return 'inset -4px -4px 5px #ffffff, inset 4px 4px 5px #ebebeb';
+                ]]]
+          icon:
+            - color: var(--paper-item-icon-active-color)
+    show_state: true
+    type: custom:button-card
+  - entity: switch.kamin_luefter_hauptschalter
+    icon: mdi:fan
+    name: Abluft 1/0
+    size: 30%
+    tap_action:
+      action: toggle
+      haptic: light
+    hold_action:
+      action: more-info
+      haptic: medium
+    styles:
+      img_cell:
+        - padding-left: 50%
+        - justify-content: start
+      card:
+        - width: min(25vw, 145px)
+        - height: min(25vw, 140px)
+        - margin: 5px
+        - margin-top: 0px
+        - border-radius: 15px
+        - background-color: var(--primary-background-color)
+      icon:
+        - color: var(--primary-text-color)
+      name:
+        - justify-self: start
+        - font-weight: bold
+        - font-size: 15px
+        - padding-left: 15px
+      state:
+        - justify-self: start
+        - font-weight: bold
+        - font-size: 15px
+        - opacity: 0.6
+        - padding: 0 15px 5px
+    state:
+      - value: 'on'
+        styles:
+          card:
+            - border-style: solid
+            - border-width: 2px
+            - border-color: var(--paper-item-icon-active-color)
+            - box-shadow: |
+                [[[
+                  if (states['sun.sun'].state == "below_horizon")
+                    return 'inset -4px -4px 5px #2c2c2c, inset 4px 4px 5px #191919';
+                  else if (states['sun.sun'].state == "above_horizon")
+                    return 'inset -4px -4px 5px #ffffff, inset 4px 4px 5px #ebebeb';
+                ]]]
+          icon:
+            - color: var(--paper-item-icon-active-color)
+    show_state: true
+    type: custom:button-card
+  - entity: switch.nodered_edb35e26_54f28
+    name: Kamin Eco mode
+    size: 30%
+    tap_action:
+      action: toggle
+      haptic: light
+    hold_action:
+      action: more-info
+      haptic: medium
+    styles:
+      img_cell:
+        - padding-left: 50%
+        - justify-content: start
+      card:
+        - width: min(25vw, 145px)
+        - height: min(25vw, 140px)
+        - margin: 5px
+        - margin-top: 0px
+        - border-radius: 15px
+        - background-color: var(--primary-background-color)
+      icon:
+        - color: var(--primary-text-color)
+      name:
+        - justify-self: start
+        - font-weight: bold
+        - font-size: 15px
+        - padding-left: 15px
+      state:
+        - justify-self: start
+        - font-weight: bold
+        - font-size: 15px
+        - opacity: 0.6
+        - padding: 0 15px 5px
+    state:
+      - value: 'on'
+        styles:
+          card:
+            - border-style: solid
+            - border-width: 2px
+            - border-color: var(--paper-item-icon-active-color)
+            - box-shadow: |
+                [[[
+                  if (states['sun.sun'].state == "below_horizon")
+                    return 'inset -4px -4px 5px #2c2c2c, inset 4px 4px 5px #191919';
+                  else if (states['sun.sun'].state == "above_horizon")
+                    return 'inset -4px -4px 5px #ffffff, inset 4px 4px 5px #ebebeb';
+                ]]]
+          icon:
+            - color: var(--paper-item-icon-active-color)
+    show_state: true
+    type: custom:button-card
+square: false
