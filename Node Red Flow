@@ -1,0 +1,1167 @@
+[
+    {
+        "id": "3ea3b39c.f378ac",
+        "type": "tab",
+        "label": "Kamin",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "50454a87.818c44",
+        "type": "group",
+        "z": "3ea3b39c.f378ac",
+        "name": "Telegram / Google Home Bot",
+        "style": {
+            "fill": "#bfdbef",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "3e2a3eed.8e8fda",
+            "98d0996.d5624e8",
+            "7a1baa1e.2ee374",
+            "86a4d2cf.5badd",
+            "9f7ac52e.509aa",
+            "efcc97dd.3bb2f8"
+        ],
+        "x": 32,
+        "y": 899,
+        "w": 1196,
+        "h": 142
+    },
+    {
+        "id": "9ace058.88ae1f8",
+        "type": "group",
+        "z": "3ea3b39c.f378ac",
+        "name": "Abluftsteuerung",
+        "style": {
+            "fill": "#bfdbef",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "6851b2ff.79d6fc",
+            "1ede9983.9b7b66",
+            "a1d5d098.3572a8",
+            "c039010d.cc8858",
+            "7eeeff5e.acd348",
+            "8027f199.d77238",
+            "99671f25.bd8978",
+            "249c6524.b44712",
+            "446a8b9d.18bb1c",
+            "67e747e9.afca68",
+            "6aab3620978cec9f"
+        ],
+        "x": 54,
+        "y": 159,
+        "w": 878,
+        "h": 342
+    },
+    {
+        "id": "70231da9.e9aaa4",
+        "type": "group",
+        "z": "3ea3b39c.f378ac",
+        "name": "Zuluftsteuerung",
+        "style": {
+            "fill": "#bfdbef",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "a7a7832a.22b98",
+            "79b62a59.de67b4",
+            "46d723b0.6c316c",
+            "c69c68eb.83f078",
+            "c15f55f.8aefc28",
+            "5fb8c89a.0cbf48",
+            "edb35e26.54f28",
+            "983b5ba7.f32088",
+            "d4728e06.38cca",
+            "4cd67c01.f248e4",
+            "19d2e248.ce903e",
+            "17c75798.a4323",
+            "3b6b3fc9.1f0438",
+            "d5f0247e.2c40d",
+            "3db2fcfd01e30344",
+            "34b27925b935bbdf"
+        ],
+        "x": 28,
+        "y": 532,
+        "w": 1358,
+        "h": 352
+    },
+    {
+        "id": "a1d5d098.3572a8",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "kamin_luefter_medium",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "fan",
+        "service": "set_percentage",
+        "entityId": "fan.kamin_abluft_fan",
+        "data": "66",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 806,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7a7832a.22b98",
+        "type": "range",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "minin": "60",
+        "maxin": "160",
+        "minout": "0",
+        "maxout": "-73",
+        "action": "clamp",
+        "round": true,
+        "property": "payload",
+        "name": "",
+        "x": 1010,
+        "y": 800,
+        "wires": [
+            [
+                "79b62a59.de67b4"
+            ]
+        ]
+    },
+    {
+        "id": "79b62a59.de67b4",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": true,
+        "service_domain": "input_number",
+        "service": "set_value",
+        "entityId": "input_number.servo_control",
+        "data": "{\"value\":\"{{payload}}\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1240,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6851b2ff.79d6fc",
+        "type": "server-state-changed",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "switch.kamin_luefter_hauptschalter",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "3",
+        "forType": "num",
+        "forUnits": "hours",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": true,
+        "ignorePrevStateUnavailable": true,
+        "ignoreCurrentStateUnknown": true,
+        "ignoreCurrentStateUnavailable": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 270,
+        "y": 460,
+        "wires": [
+            [
+                "1ede9983.9b7b66"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1ede9983.9b7b66",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "Hauptschalter",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "switch",
+        "service": "turn_on",
+        "entityId": "switch.kamin_luefter_hauptschalter",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 780,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3e2a3eed.8e8fda",
+        "type": "telegram sender",
+        "z": "3ea3b39c.f378ac",
+        "g": "50454a87.818c44",
+        "name": "",
+        "bot": "4eb3e202.01bc14",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1110,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "98d0996.d5624e8",
+        "type": "function",
+        "z": "3ea3b39c.f378ac",
+        "g": "50454a87.818c44",
+        "name": "Sammath Naur ruft nach Opfern !",
+        "func": "msg.payload = {}\nmsg.payload.chatId = ['713471655', '85532031']\nmsg.payload.type = \"message\"\nmsg.payload.content = \"Sammath Naur ruft nach Opfern !\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 845,
+        "y": 940,
+        "wires": [
+            [
+                "3e2a3eed.8e8fda"
+            ]
+        ]
+    },
+    {
+        "id": "46d723b0.6c316c",
+        "type": "delay",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 810,
+        "y": 800,
+        "wires": [
+            [
+                "a7a7832a.22b98"
+            ]
+        ]
+    },
+    {
+        "id": "c69c68eb.83f078",
+        "type": "ha-entity",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "Anheizen",
+        "server": "553c0ef2.c75f4",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 2,
+        "entityType": "switch",
+        "config": [
+            {
+                "property": "name",
+                "value": "anheizen"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": "mdi:fire"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 440,
+        "y": 760,
+        "wires": [
+            [
+                "c15f55f.8aefc28",
+                "19d2e248.ce903e",
+                "34b27925b935bbdf"
+            ],
+            [
+                "edb35e26.54f28",
+                "3b6b3fc9.1f0438"
+            ]
+        ],
+        "inputLabels": [
+            "Input"
+        ],
+        "outputLabels": [
+            "Output",
+            "Output 2"
+        ]
+    },
+    {
+        "id": "c15f55f.8aefc28",
+        "type": "range",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "minin": "0",
+        "maxin": "300",
+        "minout": "50",
+        "maxout": "50",
+        "action": "clamp",
+        "round": true,
+        "property": "payload",
+        "name": "",
+        "x": 1020,
+        "y": 760,
+        "wires": [
+            [
+                "79b62a59.de67b4"
+            ]
+        ]
+    },
+    {
+        "id": "5fb8c89a.0cbf48",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "switch",
+        "service": "turn_off",
+        "entityId": "switch.nodered_c69c68eb_83f078",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1210,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a1baa1e.2ee374",
+        "type": "castv2-sender",
+        "z": "3ea3b39c.f378ac",
+        "g": "50454a87.818c44",
+        "name": "Wohnzimmer Mini",
+        "connection": "f5d671cb.cb7128",
+        "spotifyAccessToken": "",
+        "spotifyAccessTokenExpiration": "",
+        "spotifyDeviceName": "",
+        "x": 1112,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "86a4d2cf.5badd",
+        "type": "function",
+        "z": "3ea3b39c.f378ac",
+        "g": "50454a87.818c44",
+        "name": "Bitte Holz nachlegen",
+        "func": "msg.payload = {}\nmsg.payload.type = \"TTS\"\nmsg.payload.text = \"Bitte Holz nachlegen!\"\nmsg.payload.language = \"de\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 803,
+        "y": 1000,
+        "wires": [
+            [
+                "7a1baa1e.2ee374"
+            ]
+        ]
+    },
+    {
+        "id": "9f7ac52e.509aa",
+        "type": "trigger-state",
+        "z": "3ea3b39c.f378ac",
+        "g": "50454a87.818c44",
+        "name": "",
+        "server": "553c0ef2.c75f4",
+        "version": 1,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityid": "binary_sensor.temp_falling_kamin",
+        "entityidfiltertype": "exact",
+        "debugenabled": false,
+        "constraints": [
+            {
+                "targetType": "entity_id",
+                "targetValue": "sensor.adjusted_kamin_temperatur",
+                "propertyType": "current_state",
+                "comparatorType": "<",
+                "comparatorValueDatatype": "num",
+                "comparatorValue": "170",
+                "propertyValue": "new_state.state"
+            },
+            {
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "current_state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "on",
+                "propertyValue": "new_state.state"
+            },
+            {
+                "targetType": "entity_id",
+                "targetValue": "sensor.adjusted_kamin_temperatur",
+                "propertyType": "current_state",
+                "comparatorType": ">",
+                "comparatorValueDatatype": "num",
+                "comparatorValue": "160",
+                "propertyValue": "new_state.state"
+            }
+        ],
+        "inputs": 1,
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "state_type": "str",
+        "enableInput": true,
+        "x": 238,
+        "y": 976,
+        "wires": [
+            [
+                "efcc97dd.3bb2f8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "efcc97dd.3bb2f8",
+        "type": "delay",
+        "z": "3ea3b39c.f378ac",
+        "g": "50454a87.818c44",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "hour",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "outputs": 1,
+        "x": 555,
+        "y": 976,
+        "wires": [
+            [
+                "98d0996.d5624e8",
+                "86a4d2cf.5badd"
+            ]
+        ]
+    },
+    {
+        "id": "edb35e26.54f28",
+        "type": "ha-entity",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "Kamin Eco Mode",
+        "server": "553c0ef2.c75f4",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 2,
+        "entityType": "switch",
+        "config": [
+            {
+                "property": "name",
+                "value": "Kamin Eco mode"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": "mdi:fire"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 590,
+        "y": 840,
+        "wires": [
+            [
+                "46d723b0.6c316c"
+            ],
+            [
+                "4cd67c01.f248e4"
+            ]
+        ]
+    },
+    {
+        "id": "983b5ba7.f32088",
+        "type": "range",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "minin": "60",
+        "maxin": "160",
+        "minout": "0",
+        "maxout": "-69",
+        "action": "clamp",
+        "round": true,
+        "property": "payload",
+        "name": "",
+        "x": 1010,
+        "y": 840,
+        "wires": [
+            [
+                "d4728e06.38cca"
+            ]
+        ]
+    },
+    {
+        "id": "d4728e06.38cca",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": true,
+        "service_domain": "input_number",
+        "service": "set_value",
+        "entityId": "input_number.servo_control",
+        "data": "{\"value\":\"{{payload}}\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1240,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4cd67c01.f248e4",
+        "type": "delay",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 810,
+        "y": 843,
+        "wires": [
+            [
+                "983b5ba7.f32088"
+            ]
+        ]
+    },
+    {
+        "id": "c039010d.cc8858",
+        "type": "delay",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "300",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "outputs": 1,
+        "x": 571,
+        "y": 380,
+        "wires": [
+            [
+                "a1d5d098.3572a8"
+            ]
+        ]
+    },
+    {
+        "id": "7eeeff5e.acd348",
+        "type": "trigger-state",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "",
+        "server": "553c0ef2.c75f4",
+        "version": 1,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityid": "sensor.kamin_abluft_temperature",
+        "entityidfiltertype": "exact",
+        "debugenabled": false,
+        "constraints": [
+            {
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "current_state",
+                "comparatorType": ">",
+                "comparatorValueDatatype": "num",
+                "comparatorValue": "30.0",
+                "propertyValue": "new_state.state"
+            },
+            {
+                "targetType": "entity_id",
+                "targetValue": "sensor.openweathermap_temperature",
+                "propertyType": "current_state",
+                "comparatorType": "<",
+                "comparatorValueDatatype": "num",
+                "comparatorValue": "0",
+                "propertyValue": "new_state.state"
+            }
+        ],
+        "inputs": 1,
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "state_type": "str",
+        "enableInput": true,
+        "x": 260,
+        "y": 380,
+        "wires": [
+            [
+                "c039010d.cc8858"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "19d2e248.ce903e",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "Zuluft Schalter Ein",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "switch",
+        "service": "turn_on",
+        "entityId": "switch.kamin_relay",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 750,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "17c75798.a4323",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "Zuluft aus",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_off",
+        "entityId": "light.on_off_plug_1",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1180,
+        "y": 573,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3b6b3fc9.1f0438",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "Zuluft aus",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "switch",
+        "service": "turn_off",
+        "entityId": "switch.kamin_relay",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 620,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d5f0247e.2c40d",
+        "type": "poll-state",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "",
+        "server": "553c0ef2.c75f4",
+        "version": 2,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "updateinterval": "30",
+        "updateIntervalType": "num",
+        "updateIntervalUnits": "seconds",
+        "outputinitially": false,
+        "outputonchanged": false,
+        "entity_id": "sensor.kamin_core_temp",
+        "state_type": "num",
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 1,
+        "x": 194,
+        "y": 760,
+        "wires": [
+            [
+                "c69c68eb.83f078"
+            ]
+        ]
+    },
+    {
+        "id": "8027f199.d77238",
+        "type": "poll-state",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "",
+        "server": "553c0ef2.c75f4",
+        "version": 2,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "updateinterval": "60",
+        "updateIntervalType": "num",
+        "updateIntervalUnits": "seconds",
+        "outputinitially": false,
+        "outputonchanged": false,
+        "entity_id": "sensor.kamin_core_temp",
+        "state_type": "num",
+        "halt_if": "",
+        "halt_if_type": "num",
+        "halt_if_compare": "gt",
+        "outputs": 1,
+        "x": 220,
+        "y": 220,
+        "wires": [
+            [
+                "99671f25.bd8978"
+            ]
+        ]
+    },
+    {
+        "id": "99671f25.bd8978",
+        "type": "switch",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "80",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "80",
+                "vt": "num",
+                "v2": "200",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "200",
+                "vt": "num",
+                "v2": "250",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "250",
+                "vt": "num",
+                "v2": "300",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 500,
+        "y": 240,
+        "wires": [
+            [
+                "6aab3620978cec9f"
+            ],
+            [
+                "249c6524.b44712"
+            ],
+            [
+                "446a8b9d.18bb1c"
+            ],
+            [
+                "67e747e9.afca68"
+            ]
+        ]
+    },
+    {
+        "id": "249c6524.b44712",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "Abluft 30%",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "fan",
+        "service": "set_percentage",
+        "entityId": "fan.kamin_abluft_fan",
+        "data": "{\"percentage\":\"30\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 750,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "446a8b9d.18bb1c",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "Abluft 60%",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "fan",
+        "service": "set_percentage",
+        "entityId": "fan.kamin_abluft_fan",
+        "data": "{\"percentage\":\"60\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 750,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "67e747e9.afca68",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "Abluft 100%",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "fan",
+        "service": "set_percentage",
+        "entityId": "fan.kamin_abluft_fan",
+        "data": "{\"percentage\":\"100\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 750,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3db2fcfd01e30344",
+        "type": "api-current-state",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "",
+        "server": "553c0ef2.c75f4",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "80",
+        "halt_if_type": "num",
+        "halt_if_compare": "gt",
+        "entity_id": "sensor.kamin_core_temp",
+        "state_type": "num",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 960,
+        "y": 700,
+        "wires": [
+            [
+                "17c75798.a4323",
+                "5fb8c89a.0cbf48"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6aab3620978cec9f",
+        "type": "api-call-service",
+        "z": "3ea3b39c.f378ac",
+        "g": "9ace058.88ae1f8",
+        "name": "Abluft 0%",
+        "server": "553c0ef2.c75f4",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "fan",
+        "service": "set_percentage",
+        "entityId": "fan.kamin_abluft_fan",
+        "data": "{\"percentage\":\"0\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 740,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "34b27925b935bbdf",
+        "type": "trigger",
+        "z": "3ea3b39c.f378ac",
+        "g": "70231da9.e9aaa4",
+        "name": "",
+        "op1": "1",
+        "op2": "1",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "  5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 2,
+        "x": 660,
+        "y": 680,
+        "wires": [
+            [],
+            [
+                "3db2fcfd01e30344"
+            ]
+        ]
+    },
+    {
+        "id": "553c0ef2.c75f4",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 2,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": 30
+    },
+    {
+        "id": "",
+        "type": "",
+        "botname": "",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "f5d671cb.cb7128",
+        "type": "castv2-connection",
+        "name": "Wohnzimmer Mini",
+        "target": "Wohnzimmer Mini",
+        "host": "192.168.178.33",
+        "port": "8009"
+    }
+]
