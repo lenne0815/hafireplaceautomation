@@ -1,3 +1,5 @@
+# Optional ESP config controlling the inline air duct fan that moves the warm air around the house.
+
 esphome:
   name: kamin_abluft
   platform: ESP8266
